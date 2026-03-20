@@ -1,12 +1,19 @@
 using UnityEngine;
 
+public enum MissionHubType
+{
+    Main,
+    Side,
+    Special
+}
+
 /// <summary>
 /// Locations and interactions for the three mission hubs
 /// </summary>
 public class HubLocation : MonoBehaviour
 {
     [SerializeField] public string hubLocationName;
-    [SerializeField] public MissionHub.MissionHubType locationType;
+    [SerializeField] public MissionHubType locationType;
     [SerializeField] public MissionHubCharacter character;
     [SerializeField] public float interactionRange = 3f;
     [SerializeField] private SpriteRenderer locationMarker;

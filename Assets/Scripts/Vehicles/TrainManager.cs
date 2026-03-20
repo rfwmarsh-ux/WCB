@@ -265,7 +265,3 @@ public class TrainStation : MonoBehaviour
     public int GetWaitingCount() => waitingPassengers.Count;
     public bool HasPassengers() => waitingPassengers.Count > 0;
 }
-
-public class TunnelEntrance : MonoBehaviour
-{
-}

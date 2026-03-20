@@ -53,7 +53,3 @@ public class OutfitShopManager : MonoBehaviour
 
     public List<OutfitShop> GetAllShops() => shops;
 }
-
-public class OutfitShop : MonoBehaviour
-{
-}

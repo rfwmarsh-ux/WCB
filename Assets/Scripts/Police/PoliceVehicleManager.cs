@@ -534,6 +534,11 @@ public class PoliceVehicle : MonoBehaviour
         {
             if (officer != null) Destroy(officer.gameObject);
         }
+        
+        if (SirenManager.Instance != null)
+        {
+            SirenManager.Instance.UnregisterSiren(gameObject);
+        }
     }
 
     private float lastRammingReportTime = 0f;
@@ -571,11 +576,4 @@ public class PoliceVehicle : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        if (SirenManager.Instance != null)
-        {
-            SirenManager.Instance.UnregisterSiren(gameObject);
-        }
-    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Manages day/night cycle and ambient lighting changes

@@ -13,7 +13,7 @@ public class SplitScreenManager : MonoBehaviour
     public Camera player2Camera;
     public float cameraSize = 15f;
 
-    private enum SplitScreenMode
+    public enum SplitScreenMode
     {
         None,
         Vertical,
@@ -94,11 +94,11 @@ public class SplitScreenManager : MonoBehaviour
         {
             if (hud.playerId == 1)
             {
-                hud.miniMapPosition = new Vector2(-170, 170);
+                hud.p1MiniMapPosition = new Vector2(-170, 170);
             }
             else if (hud.playerId == 2)
             {
-                hud.miniMapPosition = new Vector2(-170 - (Screen.width / 2), 170);
+                hud.p2MiniMapPosition = new Vector2(-170 - (Screen.width / 2), 170);
             }
         }
     }
@@ -141,7 +141,7 @@ public class SplitScreenManager : MonoBehaviour
         player2Camera = cam2GO.AddComponent<Camera>();
         player2Camera.orthographic = true;
         player2Camera.orthographicSize = cameraSize;
-        player2GO.tag = "MainCamera";
+        cam2GO.tag = "MainCamera";
         
         CameraSetup cam2Setup = cam2GO.AddComponent<CameraSetup>();
         cam2Setup.targetPlayer = 2;

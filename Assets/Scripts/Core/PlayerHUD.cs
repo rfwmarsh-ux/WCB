@@ -115,8 +115,13 @@ public class PlayerHUD : MonoBehaviour
     
     private void Update()
     {
+        if (InGameMenuManager.Instance != null && (InGameMenuManager.Instance.isMenuOpen || InGameMenuManager.Instance.isMapOpen))
+            return;
+
         UpdateWantedSignGlow();
         UpdateMinimapZoom();
+        HandleWeaponInput();
+        HandleMenuInput();
     }
 
     private void UpdateMinimapZoom()
@@ -186,15 +191,6 @@ public class PlayerHUD : MonoBehaviour
             new Weapon { name = "Knife", damage = 15, maxAmmo = 0, currentAmmo = 0, ammoType = AmmoType.None, fireRate = 0.6f, isMelee = true }
         };
         currentWeaponIndex = 0;
-    }
-
-    private void Update()
-    {
-        if (InGameMenuManager.Instance != null && (InGameMenuManager.Instance.isMenuOpen || InGameMenuManager.Instance.isMapOpen))
-            return;
-
-        HandleWeaponInput();
-        HandleMenuInput();
     }
 
     private void HandleWeaponInput()
