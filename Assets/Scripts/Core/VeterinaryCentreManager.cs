@@ -6,11 +6,22 @@ using System.Collections.Generic;
 /// </summary>
 public class VeterinaryCentreManager : MonoBehaviour
 {
+    public static VeterinaryCentreManager Instance { get; private set; }
     [SerializeField] private int numberOfCentres = 4;
     private List<VeterinaryCentre> veterinaryCentres = new List<VeterinaryCentre>();
     
     private VeterinaryCentre player1LastCentre;
     private VeterinaryCentre player2LastCentre;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {

@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 /// </summary>
 public class DayNightCycleManager : MonoBehaviour
 {
+    public static DayNightCycleManager Instance { get; private set; }
     [SerializeField] private float dayDurationInSeconds = 600f; // Full day cycle = 10 minutes
     [SerializeField] private Light2D mainLight;
     [SerializeField] private Camera mainCamera;
@@ -34,6 +35,16 @@ public class DayNightCycleManager : MonoBehaviour
     private Color sunsetAmbientColor = new Color(1f, 0.6f, 0.4f, 1f);
     private Color nightAmbientColor = new Color(0.3f, 0.35f, 0.5f, 1f);
     private Color duskAmbientColor = new Color(0.5f, 0.4f, 0.6f, 1f);
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {

@@ -57,6 +57,8 @@ public class PedestrianManager : MonoBehaviour
 
     private void Update()
     {
+        activePedestrians.RemoveAll(p => p == null);
+
         spawnUpdateTimer += Time.deltaTime;
         if (spawnUpdateTimer >= spawnUpdateInterval)
         {
@@ -223,6 +225,7 @@ public class PedestrianManager : MonoBehaviour
         int count = 0;
         foreach (var ped in activePedestrians)
         {
+            if (ped == null) continue;
             if (Vector2.Distance(ped.transform.position, poi.location) <= poi.radius)
                 count++;
         }
@@ -287,6 +290,7 @@ public class PedestrianManager : MonoBehaviour
         List<Pedestrian> result = new List<Pedestrian>();
         foreach (var ped in activePedestrians)
         {
+            if (ped == null) continue;
             if (Vector3.Distance(ped.transform.position, position) <= radius)
                 result.Add(ped);
         }

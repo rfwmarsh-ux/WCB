@@ -12,7 +12,7 @@ public class Enemy : NPC
     protected float lastAttackTime;
     protected bool isChasing;
 
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -41,6 +41,7 @@ public class Enemy : NPC
     protected void ChasePlayer()
     {
         isChasing = true;
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTarget.position);
         Vector2 direction = (playerTarget.position - transform.position).normalized;
         transform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
 

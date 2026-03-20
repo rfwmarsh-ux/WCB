@@ -191,6 +191,13 @@ public class PedestrianTrafficBehavior : MonoBehaviour
         }
         
         Debug.Log($"{name} was in a traffic accident!");
+
+        // Escalate violent reactions after a road incident.
+        PedestrianWeaponSystem weaponSystem = GetComponent<PedestrianWeaponSystem>();
+        if (weaponSystem != null)
+        {
+            weaponSystem.OnTrafficAccident();
+        }
     }
 
     private void UpdateViolentBehavior()

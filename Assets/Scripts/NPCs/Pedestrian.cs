@@ -51,8 +51,10 @@ public class Pedestrian : NPC
         new Color(0.5f, 1f, 1f, 1f),      // Cyan
     };
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -88,7 +90,7 @@ public class Pedestrian : NPC
             roadDirection = new Vector3(side * offset, 0f, 0f);
         }
         
-        Vector3 newTarget = homePosition + roadDirection + (Vector3)Random.insideUnitCircle * 30f;
+        Vector3 newTarget = (Vector3)homePosition + roadDirection + (Vector3)Random.insideUnitCircle * 30f;
         
         newTarget.x = Mathf.Clamp(newTarget.x, homePosition.x - homeRadius, homePosition.x + homeRadius);
         newTarget.y = Mathf.Clamp(newTarget.y, homePosition.y - homeRadius, homePosition.y + homeRadius);
@@ -103,7 +105,7 @@ public class Pedestrian : NPC
         
         do
         {
-            newTarget = homePosition + (Vector3)Random.insideUnitCircle * homeRadius;
+            newTarget = (Vector3)homePosition + (Vector3)Random.insideUnitCircle * homeRadius;
             attempts++;
         } while (Vector3.Distance(newTarget, transform.position) < minDistanceFromHome && attempts < 10);
         
@@ -194,7 +196,13 @@ public class Pedestrian : NPC
         walkSpeed = speed;
     }
 
-    public PedestrianType GetType() => Type;
+    public PedestrianType GetPedestrianType() => Type;
+    public bool IsDead() => !IsAlive();
+    public void Kill()
+    {
+        if (!IsAlive()) return;
+        TakeDamage(GetHealth());
+    }
     public Vector2 GetCurrentDirection() => currentDirection;
     public bool IsWalking() => isWalking;
 }

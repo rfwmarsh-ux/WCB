@@ -23,10 +23,9 @@ public class GangMember : Enemy
     [SerializeField] private float chaseSpeed = 5f;
     private Vector2 currentDirection = Vector2.right;
     private Vector3 targetPosition;
-    private bool isInCombat = false;
     private Transform playerTransform;
 
-    private enum GangMemberState
+    public enum GangMemberState
     {
         Patrolling,
         Pursuing,
@@ -36,8 +35,10 @@ public class GangMember : Enemy
 
     private GangMemberState currentState = GangMemberState.Patrolling;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -52,8 +53,6 @@ public class GangMember : Enemy
     private void FixedUpdate()
     {
         if (playerTransform == null) return;
-
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
         switch (currentState)
         {
@@ -112,7 +111,7 @@ public class GangMember : Enemy
         if (distanceToPlayer < 2f)
         {
             currentState = GangMemberState.Fighting;
-            isInCombat = true;
+            SetInCombat(true);
         }
     }
 
@@ -137,9 +136,8 @@ public class GangMember : Enemy
     public void StopPursue()
     {
         currentState = GangMemberState.Patrolling;
-        isInCombat = false;
+        SetInCombat(false);
     }
 
-    public bool IsInCombat() => isInCombat;
     public GangMemberState GetCurrentState() => currentState;
 }

@@ -225,7 +225,7 @@ public class Player2Manager : MonoBehaviour
         Debug.Log("Player 2 exited vehicle");
     }
 
-    private void Die()
+    public void Die()
     {
         isAlive = false;
         currentHealth = 0;
@@ -337,7 +337,9 @@ public class Player2Manager : MonoBehaviour
     }
 
     public float GetHealth() => currentHealth;
+    public float Health => currentHealth;
     public float GetMaxHealth() => maxHealth;
     public bool IsAlive() => isAlive;
     public Gun GetCurrentGun() => currentGun;
+    public Vehicle GetCurrentVehicle() => currentVehicle;
 }

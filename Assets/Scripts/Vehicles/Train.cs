@@ -25,6 +25,7 @@ public class Train : MonoBehaviour
     }
 
     private TrainDirection direction = TrainDirection.Forward;
+    private bool isStolen = false;
 
     private void Awake()
     {
@@ -195,6 +196,12 @@ public class Train : MonoBehaviour
     public int GetCapacity() => maxPassengers;
     public int GetTrainNumber() => trainNumber;
     public bool IsAtStation() => isStopped;
+    public bool IsStopped() => isStopped;
+    public bool IsMoving() => isMoving && !isStopped;
+    public float GetCurrentSpeed() => speed;
+    public float GetMaxSpeed() => speed;
+    public bool IsStolen() => isStolen;
+    public void SetDriver(PlayerController driver) { }
 }
 
 public class TrainInteraction : MonoBehaviour

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ScrapyardManager : MonoBehaviour
 {
@@ -90,9 +91,9 @@ public class ScrapyardManager : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Player2"))
         {
             PlayerManager pm = other.GetComponent<PlayerManager>();
-            if (pm != null && pm.IsInVehicle && pm.GetCurrentVehicle() != null)
+            if (pm != null && pm.IsInVehicle && pm.currentVehicle != null)
             {
-                playerVehicle = pm.GetCurrentVehicle();
+                playerVehicle = pm.currentVehicle;
                 StartProcessing();
             }
         }
@@ -269,4 +270,28 @@ public class ScrapyardManager : MonoBehaviour
 
     public bool IsProcessing() => isProcessing;
     public float GetCost() => vehicleChangeCost;
+
+    public List<Scrapyard> GetAllScrapyards()
+    {
+        return new List<Scrapyard>(FindObjectsByType<Scrapyard>(FindObjectsSortMode.None));
+    }
+
+    public Scrapyard GetNearestScrapyard(Vector2 playerPosition)
+    {
+        List<Scrapyard> scrapyards = GetAllScrapyards();
+        if (scrapyards.Count == 0) return null;
+
+        Scrapyard nearest = scrapyards[0];
+        float minDistance = Vector2.Distance(playerPosition, nearest.GetLocation());
+        foreach (Scrapyard yard in scrapyards)
+        {
+            float distance = Vector2.Distance(playerPosition, yard.GetLocation());
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearest = yard;
+            }
+        }
+        return nearest;
+    }
 }

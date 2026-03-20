@@ -25,6 +25,7 @@ public class MetroTram : MonoBehaviour
     }
 
     private TramDirection direction = TramDirection.Forward;
+    private bool isStolen = false;
 
     private void Awake()
     {
@@ -143,6 +144,12 @@ public class MetroTram : MonoBehaviour
     public int GetCapacity() => maxPassengers;
     public int GetTramNumber() => tramNumber;
     public bool IsAtStation() => isStopped;
+    public bool IsStopped() => isStopped;
+    public bool IsMoving() => isMovingToStop && !isStopped;
+    public float GetCurrentSpeed() => speed;
+    public float GetMaxSpeed() => speed;
+    public bool IsStolen() => isStolen;
+    public void SetDriver(PlayerController driver) { }
     public MetroStation GetCurrentStation()
     {
         if (currentRouteIndex < route.Count)

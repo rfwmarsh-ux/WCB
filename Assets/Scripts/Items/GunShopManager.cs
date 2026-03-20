@@ -6,7 +6,18 @@ using System.Collections.Generic;
 /// </summary>
 public class GunShopManager : MonoBehaviour
 {
+    public static GunShopManager Instance { get; private set; }
     private List<GunShop> gunShops = new List<GunShop>();
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {

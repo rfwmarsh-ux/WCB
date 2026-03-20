@@ -102,7 +102,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         if (!isAlive) return;
 
@@ -213,6 +213,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public float GetHealth() => currentHealth;
+    public float Health => currentHealth;
     public float GetMaxHealth() => maxHealth;
     public float GetArmour() => currentArmour;
     public float GetMaxArmour() => maxArmour;
@@ -327,6 +328,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public Gun GetCurrentGun() => currentGun;
+    public Vehicle GetCurrentVehicle() => currentVehicle;
     public int GetCurrentAmmo() => currentAmmo;
 
     public void EquipMeleeWeapon(object meleeWeapon)
